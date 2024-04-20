@@ -5,7 +5,8 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "Single Variables/IntData")]
 public class IntData : ScriptableObject
 {
-    [SerializeField] private int value, minValue, maxValue;
+    [SerializeField] public int value;
+    [SerializeField] private int minValue, maxValue;
 
     [FormerlySerializedAs("minValueEvent")] public UnityEvent<float> valueOutOfRange;
     [FormerlySerializedAs("updateValueEvent")] public UnityEvent onValueChanged;
@@ -36,6 +37,13 @@ public class IntData : ScriptableObject
         Value = data;
     }
     
+    public void CompareValue(IntData data)
+    {
+        if (Value > data.Value)
+        {
+            data.Value = Value;
+        }
+    }
     public void IncrementValue()
     {
         value++;
