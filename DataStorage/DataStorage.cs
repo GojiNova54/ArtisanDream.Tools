@@ -7,10 +7,6 @@ public class DataStorage : ScriptableObject
     public ScriptableObject data;
     public List<ScriptableObject> listData;
     
-    private void OnEnable()
-    {
-        DontDestroyOnLoad(this);
-    }
     
     private void SaveData<T>(T obj) where T : Object
     {

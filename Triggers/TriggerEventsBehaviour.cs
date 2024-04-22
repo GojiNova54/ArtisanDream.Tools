@@ -4,7 +4,8 @@ using UnityEngine.Events;
 
 public class TriggerEventsBehaviour : MonoEventsBehaviour
 {
-    public AudioClip sound; // Add this line
+    public AudioClip sound;
+    public GameObject particleEffectPrefab; // Reference to the particle effect prefab
     public GameAction triggerEnterAction, triggerEnterRepeatAction, triggerEnterEndAction, triggerExitAction;
     public UnityEvent triggerEnterEvent, triggerEnterRepeatEvent, triggerEnterEndEvent, triggerExitEvent;
     private WaitForSeconds waitForTriggerEnterObj, waitForTriggerRepeatObj;
@@ -43,9 +44,15 @@ public class TriggerEventsBehaviour : MonoEventsBehaviour
 
         // Play the sound and disable the GameObject with a specific tag
         AudioSource.PlayClipAtPoint(sound, other.transform.position);
-        if (gameObject.CompareTag("Other")) 
+        if (gameObject.CompareTag("Other"))
         {
             gameObject.SetActive(false);
+        }
+
+        // Instantiate the particle effect prefab at the position of the other object
+        if (particleEffectPrefab != null)
+        {   
+            Instantiate(particleEffectPrefab, other.transform.position, Quaternion.identity);
         }
     }
 
